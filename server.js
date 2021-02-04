@@ -12,10 +12,10 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.listen(3000, function () {
-  console.log("server is running on port 3000");
-});
-server.use("/potlucks", potluckRouter);
+// server.listen(3000, function () {
+//   console.log("server is running on port 3000");
+// });
+server.use("/potlucks", restricted, potluckRouter);
 server.use("/users", userRouter);
 
 module.exports = server;
