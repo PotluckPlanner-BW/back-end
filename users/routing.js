@@ -70,14 +70,14 @@ router.put("/update/:id", restricted, async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const id = req.params.id;
-    if (!email || !password) {
+    if (!username || !password) {
       return res.status(400).json({
         message:
           "required field(s) missing. Please try again with all required fields.",
       });
     }
     const newUser = await Users.updateUser(id, {
-      email,
+      username,
 
       password: await bcrypt.hash(password, 10),
     });
@@ -119,7 +119,7 @@ router.get("/logout", async (req, res, next) => {
 function generateToken(user) {
   const payload = {
     subject: user.id,
-    email: user.username,
+    username: user.username,
   };
 
   const options = {

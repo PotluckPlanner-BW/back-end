@@ -4,8 +4,9 @@ module.exports = {
   development: {
     client: "sqlite3",
     connection: {
-      filename: "./dev.sqlite3",
+      filename: "./potluck.db3",
     },
+    useNullAsDefault: true,
   },
 
   staging: {
