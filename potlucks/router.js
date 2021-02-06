@@ -45,18 +45,17 @@ router.get("/userid/:id", restricted, async (req, res, next) => {
 router.post("/add", restricted, async (req, res, next) => {
   try {
     const potluck = req.body;
-
-    if (!potluck.potluck) {
-      res.status(400).json({
+    if (!potluck.location || !potluck.date || !potluck.time) {
+      return res.status(400).json({
         message:
           "required field(s) missing. Please try again with all required fields.",
       });
     }
-    await Potlucks.addPotluck(potlucks);
-    console.log(potlucks);
-    res.status(201).json({ Created: potlucks });
+    await Potlucks.addPotluck(potluck);
+      console.log(potluck);
+      res.status(201).json({ created: potluck });
   } catch (err) {
-    next(err);
+      next(err);
   }
 });
 
@@ -64,7 +63,7 @@ router.put("/:id", restricted, async (req, res, next) => {
   try {
     const id = req.params.id;
     const changes = req.body;
-    if (!changes.id || !changes.potlucks) {
+    if ( !id || !changes ) {
       return res.status(400).json({
         message:
           "required field(s) missing. Please try again with all required fields.",

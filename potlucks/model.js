@@ -38,14 +38,17 @@ function getPotluckByUserId(id) {
 }
 
 function addPotluck(potluck) {
-  return db("potlucks");
-  insert(potluck, "id").then((ids) => {
-    getPotluckById(ids[0]);
+  return db("potlucks").insert(potluck)
+    .then((id) => {
+       getPotluckById(id[0]);
   });
 }
 
 function updatePotluck(id, changes) {
-  return db("potlucks").where("id", id).update(changes);
+  return db("potlucks").where("id", id).update(changes)
+    .then((id) => {
+      getPotluckById(id[0]);
+  }); 
 }
 
 function deletePotluck(id) {
