@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", restricted, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
 
@@ -26,7 +26,7 @@ router.get("/:id", restricted, async (req, res, next) => {
   }
 });
 
-router.get("/userid/:id", restricted, async (req, res, next) => {
+router.get("/userid/:id", async (req, res, next) => {
   try {
     const potluck = await Potlucks.getPotluckByUserId(req.params.id);
 
@@ -42,7 +42,7 @@ router.get("/userid/:id", restricted, async (req, res, next) => {
   }
 });
 
-router.post("/add", restricted, async (req, res, next) => {
+router.post("/add", async (req, res, next) => {
   try {
     const potluck = req.body;
 
@@ -60,7 +60,7 @@ router.post("/add", restricted, async (req, res, next) => {
   }
 });
 
-router.put("/:id", restricted, async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const changes = req.body;

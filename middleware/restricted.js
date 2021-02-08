@@ -1,17 +1,24 @@
 const jwt = require("jsonwebtoken");
 const users = require("../users/model");
 
-async function restricted(req, res, next) {
-  try {
-    const decoded = jwt.verify(
-      req.headers.authorization,
-      process.env.JWT_SECRET
-    );
-    const user = await users.getUserById(decoded.subject);
-    if (!user) throw new Error();
-    req.user = user;
+// async function restricted(req, res, next) {
+//   try {
+//     const decoded = jwt.verify(
+//       req.headers.authorization,
+//       process.env.JWT_SECRET
+//     );
+//     const user = await users.getUserById(decoded.subject);
+//     if (!user) throw new Error();
+//     req.user = user;
+//     next();
+//   } catch (error) {
+//     res.status(401).json({ message: "you shall not pass!!" });
+//   }
+// }
+function restricted(req, res, next) {
+  if (req.session && req.session.userId) {
     next();
-  } catch (error) {
+  } else {
     res.status(401).json({ message: "you shall not pass!!" });
   }
 }

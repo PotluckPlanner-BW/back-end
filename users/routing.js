@@ -27,7 +27,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", restricted, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await Users.getUserById(id);
@@ -66,7 +66,7 @@ router.post("/login", (req, res) => {
     });
 });
 //UPDATE
-router.put("/update/:id", restricted, async (req, res, next) => {
+router.put("/update/:id", async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const id = req.params.id;
@@ -89,7 +89,7 @@ router.put("/update/:id", restricted, async (req, res, next) => {
   }
 });
 
-router.delete("/delete/:id", restricted, async (req, res, next) => {
+router.delete("/delete/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     await Users.deleteUser(id);
