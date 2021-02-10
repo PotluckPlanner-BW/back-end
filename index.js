@@ -8,8 +8,8 @@ server.listen(port, () => {
 
 server.get("/", async (req, res) => {
   try {
-    const messageOfTheDay = (await process.env.MOTD) || "Hello World!"; // add this line
-    res.status(200).json({ motd: messageOfTheDay }); // change this line
+    const messageOfTheDay = (await process.env.MOTD) || "Hello World!";
+    res.status(200).json({ motd: messageOfTheDay });
   } catch (error) {
     console.error("\nERROR", error);
     res.status(500).json({ error: "Cannot get the daily message" });
